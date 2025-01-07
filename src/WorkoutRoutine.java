@@ -36,3 +36,4 @@ public class WorkoutRoutine {
                 ", difficulty='" + difficulty;
     }
 }
+

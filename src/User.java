@@ -1,4 +1,9 @@
-public class User {
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+class User {
+    private static List<User> users = new ArrayList<>();
     private int id;
     private static int id_counter = 0;
     private String name;
@@ -7,8 +12,7 @@ public class User {
     private int height;
     private WorkoutRoutine routine;
 
-
-    User(){
+    User() {
         this.id = id_counter++;
     }
 
@@ -19,57 +23,47 @@ public class User {
         this.height = height;
         this.weight = weight;
         this.routine = routine;
+    }
 
+    public static void addUser(User user) {
+        users.add(user);
     }
-    public WorkoutRoutine getRoutine() {
-        return routine;
+
+    public static List<User> getUsers() {
+        return users;
     }
-    public void setRoutine(WorkoutRoutine routine) {
-        this.routine = routine;
+
+    public static List<User> filterUsersByRoutine(String routineName) {
+        List<User> filteredUsers = new ArrayList<>();
+        for (User user : users) {
+            if (user.getRoutine().getName().equalsIgnoreCase(routineName)) {
+                filteredUsers.add(user);
+            }
+        }
+        return filteredUsers;
     }
-    public double getWeight() {
+
+    public static void sortUsersByWeight() {
+        users.sort(Comparator.comparingDouble(User::getWeight));
+    }
+
+    private double getWeight() {
         return weight;
     }
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
 
-    public int getHeight() {
-        return height;
-    }
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
+    public WorkoutRoutine getRoutine() {
+        return routine;
     }
 
     @Override
     public String toString() {
-        return
+        return "\nUser:\n" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", weight=" + weight +
-                ", height=" + height+"\n"+routine.toString();
-
+                ", height=" + height +
+                ", routine=" + routine +
+                '}';
     }
 }
