@@ -30,8 +30,7 @@ public class WorkoutRoutine {
 
     @Override
     public String toString() {
-        return "WorkoutRoutine:" +
-                "name='" + name + '\'' +
+        return name  +
                 ", duration=" + duration +
                 ", difficulty='" + difficulty;
     }
